@@ -14,7 +14,7 @@ export const Routes = [
     route: "/users/:id",
     controller: UserController,
     action: "one",
-    validation: [param("id").isInt().withMessage("id must be integer")],
+    validation: [param("id").isInt()],
   },
   {
     method: "post",
@@ -22,9 +22,11 @@ export const Routes = [
     controller: UserController,
     action: "save",
     validation: [
-      body("firstName").isString().withMessage("firstName must be string"),
-      body("lastName").isString().withMessage("lastName must be string"),
-      body("age").isInt({ min: 0 }).withMessage("age must be integer"),
+      body("firstName").isString(),
+      body("lastName").isString(),
+      body("age")
+        .isInt({ min: 0 })
+        .withMessage("age must be a positive integer"),
     ],
   },
   {
@@ -32,6 +34,6 @@ export const Routes = [
     route: "/users/:id",
     controller: UserController,
     action: "remove",
-    validation: [param("id").isInt().withMessage("id must be integer")],
+    validation: [param("id").isInt()],
   },
 ];
